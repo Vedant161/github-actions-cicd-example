@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1770647335422,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1770647619812,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,14 +12,14 @@\n     runs-on: ${{ matrix.os }}\r\n     strategy:\r\n       matrix:\r\n         os: [ubuntu-latest]\r\n-        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']\r\n+        python-version: ['3.10', '3.11']\r\n         include:\r\n           - os: windows-latest\r\n-            python-version: '3.7'\r\n+            python-version: '3.11'\r\n           - os: macos-latest\r\n-            python-version: '3.7'\r\n+            python-version: '3.11'\r\n     timeout-minutes: 10\r\n \r\n     steps:\r\n     - name: Check out code repository\r\n"
                 }
             ],
             "date": 1770647335422,
