@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".github/workflows/7_ci_cd.yml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1770651682446,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1770651682446,
+            "name": "Commit-0",
+            "content": "name: CI/CD Pipeline\r\n\r\non:\r\n  push:\r\n    branches: [ main, develop ]\r\n  pull_request:\r\n    branches: [ main ]\r\n\r\njobs:\r\n  build-test:\r\n    runs-on: ubuntu-latest\r\n    timeout-minutes: 10\r\n\r\n    steps:\r\n      - name: Checkout code\r\n        uses: actions/checkout@v4\r\n\r\n      - name: Setup Python\r\n        uses: actions/setup-python@v5\r\n        with:\r\n          python-version: '3.11'\r\n\r\n      - name: Install dependencies\r\n        run: |\r\n          python -m pip install --upgrade pip\r\n          pip install -r requirements.txt\r\n          pip install -r requirements_dev.txt\r\n          pip install -e .\r\n\r\n      - name: Run Linter\r\n        run: flake8 .\r\n\r\n      - name: Run Tests\r\n        run: python -m unittest discover\r\n\r\n      - name: Build Package\r\n        run: python setup.py sdist bdist_wheel\r\n\r\n      - name: Upload test artifacts\r\n        if: always()\r\n        uses: actions/upload-artifact@v4\r\n        with:\r\n          name: build-artifacts\r\n          path: dist/"
+        }
+    ]
+}
