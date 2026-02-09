@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".github/workflows/ci-cd.yml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1770647188715,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1770647188715,
+            "name": "Commit-0",
+            "content": "name: CI/CD Pipeline\r\n\r\non:\r\n  push:\r\n    branches: [ main, develop ]\r\n  pull_request:\r\n    branches: [ main ]\r\n\r\njobs:\r\n  build-test:\r\n    runs-on: ubuntu-latest\r\n\r\n    steps:\r\n      - name: Checkout Repository\r\n        uses: actions/checkout@v4\r\n\r\n      - name: Setup Node.js\r\n        uses: actions/setup-node@v4\r\n        with:\r\n          node-version: '20'\r\n          cache: 'npm'\r\n\r\n      - name: Install Dependencies\r\n        run: npm install\r\n\r\n      - name: Run Linter\r\n        run: npm run lint\r\n\r\n      - name: Run Tests\r\n        run: npm test\r\n\r\n      - name: Build Application\r\n        run: echo \"Build Successful\"\r\n\r\n      - name: Upload Test Results\r\n        if: always()\r\n        uses: actions/upload-artifact@v4\r\n        with:\r\n          name: test-results\r\n          path: test-results/"
+        }
+    ]
+}
