@@ -1,0 +1,18 @@
+{
+    "sourceFile": "Jenkinsfile",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1770653668087,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1770653668086,
+            "name": "Commit-0",
+            "content": "pipeline {\r\n    agent any\r\n\r\n    stages {\r\n\r\n        stage('Checkout') {\r\n            steps {\r\n                checkout scm\r\n            }\r\n        }\r\n\r\n        stage('Install Dependencies') {\r\n            steps {\r\n                sh '''\r\n                python3 -m pip install --upgrade pip\r\n                pip install -r requirements.txt\r\n                '''\r\n            }\r\n        }\r\n\r\n        stage('Run Tests') {\r\n            steps {\r\n                sh 'python3 -m unittest discover'\r\n            }\r\n        }\r\n\r\n        stage('Build') {\r\n            steps {\r\n                sh 'echo Build Successful'\r\n            }\r\n        }\r\n    }\r\n}"
+        }
+    ]
+}
