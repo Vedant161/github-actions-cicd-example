@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1770651682446,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1770652127691,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -24,8 +24,9 @@\n         run: |\r\n           python -m pip install --upgrade pip\r\n           pip install -r requirements.txt\r\n           pip install -r requirements_dev.txt\r\n+          pip install flake8\r\n           pip install -e .\r\n \r\n       - name: Run Linter\r\n         run: flake8 .\r\n@@ -35,9 +36,9 @@\n \r\n       - name: Build Package\r\n         run: python setup.py sdist bdist_wheel\r\n \r\n-      - name: Upload test artifacts\r\n+      - name: Upload build artifacts\r\n         if: always()\r\n         uses: actions/upload-artifact@v4\r\n         with:\r\n           name: build-artifacts\r\n"
                 }
             ],
             "date": 1770651682446,

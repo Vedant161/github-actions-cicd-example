@@ -25,6 +25,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install -r requirements_dev.txt
+          pip install flake8
           pip install -e .
 
       - name: Run Linter
@@ -36,7 +37,7 @@ jobs:
       - name: Build Package
         run: python setup.py sdist bdist_wheel
 
-      - name: Upload test artifacts
+      - name: Upload build artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
