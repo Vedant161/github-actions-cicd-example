@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".github/workflows/5_docs_deploy.yml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1770647310674,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1770647310674,
+            "name": "Commit-0",
+            "content": "name: Deploy docs to GitHub Pages\r\n\r\non:\r\n  push:\r\n    branches: [ main ]\r\n  workflow_dispatch:\r\n\r\njobs:\r\n  deploy:\r\n    runs-on: ${{ matrix.os }}\r\n    strategy:\r\n      matrix:\r\n        os: [ubuntu-latest]\r\n        python-version: ['3.11']\r\n    env:\r\n      OS: ${{ matrix.os }}\r\n      PYTHON: ${{ matrix.python-version }}\r\n    timeout-minutes: 10\r\n\r\n    steps:\r\n    - name: Check out code repository\r\n      uses: actions/checkout@v2\r\n      with:\r\n        path:  github-actions-cicd-example\r\n\r\n    - name: Check out docs repository\r\n      uses: actions/checkout@v2\r\n      with:\r\n        repository: alexmalins/alexmalins.github.io\r\n        path: alexmalins.github.io\r\n        token: ${{secrets.PUSH_TOKEN}}\r\n\r\n    - name: Set up Python ${{ matrix.python-version }}\r\n      uses: actions/setup-python@v2\r\n      with:\r\n        python-version: ${{ matrix.python-version }}\r\n\r\n    - name: Install dependencies\r\n      run: |\r\n        cd  github-actions-cicd-example\r\n        python -m pip install --upgrade pip\r\n        pip install -r requirements.txt\r\n        pip install -r requirements_docs.txt\r\n\r\n    - name: Build docs\r\n      run: |\r\n        cd github-actions-cicd-example/docs\r\n        make html\r\n\r\n    - name: Push docs\r\n      run: |\r\n        cp -RT  github-actions-cicd-example/docs/build/html alexmalins.github.io/docs/github-actions-cicd-example\r\n        cd alexmalins.github.io\r\n        git config --local user.name \"github-actions[bot]\"\r\n        git config --local user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\r\n        git add -A\r\n        git diff-index --quiet HEAD || (git commit -m \"Documentation update\" && git push https://$USERNAME:$REPO_KEY@github.com/alexmalins/alexmalins.github.io.git)\r\n      env:\r\n        REPO_KEY: ${{secrets.PUSH_TOKEN}}\r\n        USERNAME: github-actions[bot]\r\n"
+        }
+    ]
+}

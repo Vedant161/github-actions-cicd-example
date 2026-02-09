@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".github/workflows/4_docs_build.yml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1770647315338,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1770647315338,
+            "name": "Commit-0",
+            "content": "name: Check docs build\r\n\r\non:\r\n  push:\r\n    branches: [ main ]\r\n  pull_request:\r\n    branches: [ main ]\r\n  workflow_dispatch:\r\n\r\njobs:\r\n  run:\r\n    runs-on: ${{ matrix.os }}\r\n    strategy:\r\n      matrix:\r\n        os: [ubuntu-latest]\r\n        python-version: ['3.11']\r\n    env:\r\n      OS: ${{ matrix.os }}\r\n      PYTHON: ${{ matrix.python-version }}\r\n    timeout-minutes: 10\r\n\r\n    steps:\r\n    - name: Check out code repository\r\n      uses: actions/checkout@v2\r\n\r\n    - name: Set up Python ${{ matrix.python-version }}\r\n      uses: actions/setup-python@v2\r\n      with:\r\n        python-version: ${{ matrix.python-version }}\r\n\r\n    - name: Install dependencies\r\n      run: |\r\n        python -m pip install --upgrade pip\r\n        pip install -r requirements.txt\r\n        pip install -r requirements_docs.txt\r\n\r\n    - name: Check docs build successfully\r\n      run: |\r\n        cd docs\r\n        make html\r\n"
+        }
+    ]
+}

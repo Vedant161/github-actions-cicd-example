@@ -1,0 +1,18 @@
+{
+    "sourceFile": ".github/workflows/1_tests.yml",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1770647335422,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1770647335422,
+            "name": "Commit-0",
+            "content": "name: Tests\r\n\r\non:\r\n  push:\r\n    branches: [ main ]\r\n  pull_request:\r\n    branches: [ main ]\r\n  workflow_dispatch:\r\n\r\njobs:\r\n  test:\r\n    runs-on: ${{ matrix.os }}\r\n    strategy:\r\n      matrix:\r\n        os: [ubuntu-latest]\r\n        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']\r\n        include:\r\n          - os: windows-latest\r\n            python-version: '3.7'\r\n          - os: macos-latest\r\n            python-version: '3.7'\r\n    timeout-minutes: 10\r\n\r\n    steps:\r\n    - name: Check out code repository\r\n      uses: actions/checkout@v2\r\n\r\n    - name: Set up Python ${{ matrix.python-version }}\r\n      uses: actions/setup-python@v2\r\n      with:\r\n        python-version: ${{ matrix.python-version }}\r\n\r\n    - name: Install dependencies and package\r\n      run: |\r\n        python -m pip install --upgrade pip\r\n        pip install -r requirements.txt\r\n        pip install -e .\r\n\r\n    - name: Run unittest tests\r\n      run: python -m unittest discover\r\n"
+        }
+    ]
+}
