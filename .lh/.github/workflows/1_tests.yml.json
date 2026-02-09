@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1770647335422,
@@ -12,6 +12,10 @@
                 {
                     "date": 1770647619812,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -12,14 +12,14 @@\n     runs-on: ${{ matrix.os }}\r\n     strategy:\r\n       matrix:\r\n         os: [ubuntu-latest]\r\n-        python-version: ['3.7', '3.8', '3.9', '3.10', '3.11']\r\n+        python-version: ['3.10', '3.11']\r\n         include:\r\n           - os: windows-latest\r\n-            python-version: '3.7'\r\n+            python-version: '3.11'\r\n           - os: macos-latest\r\n-            python-version: '3.7'\r\n+            python-version: '3.11'\r\n     timeout-minutes: 10\r\n \r\n     steps:\r\n     - name: Check out code repository\r\n"
+                },
+                {
+                    "date": 1770648614250,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -9,32 +9,29 @@\n \r\n jobs:\r\n   test:\r\n     runs-on: ${{ matrix.os }}\r\n+\r\n     strategy:\r\n       matrix:\r\n         os: [ubuntu-latest]\r\n         python-version: ['3.10', '3.11']\r\n-        include:\r\n-          - os: windows-latest\r\n-            python-version: '3.11'\r\n-          - os: macos-latest\r\n-            python-version: '3.11'\r\n+\r\n     timeout-minutes: 10\r\n \r\n     steps:\r\n-    - name: Check out code repository\r\n-      uses: actions/checkout@v2\r\n+      - name: Checkout code\r\n+        uses: actions/checkout@v4\r\n \r\n-    - name: Set up Python ${{ matrix.python-version }}\r\n-      uses: actions/setup-python@v2\r\n-      with:\r\n-        python-version: ${{ matrix.python-version }}\r\n+      - name: Setup Python\r\n+        uses: actions/setup-python@v5\r\n+        with:\r\n+          python-version: ${{ matrix.python-version }}\r\n \r\n-    - name: Install dependencies and package\r\n-      run: |\r\n-        python -m pip install --upgrade pip\r\n-        pip install -r requirements.txt\r\n-        pip install -e .\r\n+      - name: Install dependencies\r\n+        run: |\r\n+          python -m pip install --upgrade pip\r\n+          pip install -r requirements.txt\r\n+          pip install -e .\r\n \r\n-    - name: Run unittest tests\r\n-      run: python -m unittest discover\r\n+      - name: Run tests\r\n+        run: python -m unittest discover\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1770647335422,

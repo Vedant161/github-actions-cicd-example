@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1770647304841,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1770648655202,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,44 +1,23 @@\n-name: Upload release to PyPI\r\n+name: PyPI Release (Disabled)\r\n \r\n on:\r\n-  release:\r\n-    types: [created]\r\n+  workflow_dispatch:\r\n \r\n jobs:\r\n-  deploy:\r\n-    runs-on: ${{ matrix.os }}\r\n-    strategy:\r\n-      matrix:\r\n-        os: [ubuntu-latest]\r\n-        python-version: ['3.11']\r\n-    env:\r\n-      OS: ${{ matrix.os }}\r\n-      PYTHON: ${{ matrix.python-version }}\r\n-    timeout-minutes: 10\r\n+  build:\r\n+    runs-on: ubuntu-latest\r\n \r\n     steps:\r\n-    - name: Check out code repository\r\n-      uses: actions/checkout@v2\r\n+      - name: Checkout code\r\n+        uses: actions/checkout@v4\r\n \r\n-    - name: Set up Python ${{ matrix.python-version }}\r\n-      uses: actions/setup-python@v2\r\n-      with:\r\n-        python-version: ${{ matrix.python-version }}\r\n+      - name: Setup Python\r\n+        uses: actions/setup-python@v5\r\n+        with:\r\n+          python-version: '3.11'\r\n \r\n-    - name: Install dependencies and build\r\n-      run: |\r\n-        python -m pip install --upgrade pip\r\n-        pip install setuptools wheel twine\r\n-        python setup.py sdist bdist_wheel\r\n-\r\n-    - name: Publish to TestPyPI\r\n-      env:\r\n-        TWINE_USERNAME: __token__\r\n-        TWINE_PASSWORD: ${{ secrets.TESTPYPI_API_TOKEN }}\r\n-      run: twine upload --repository-url https://test.pypi.org/legacy/ dist/*\r\n-\r\n-    - name: Publish to PyPI\r\n-      env:\r\n-        TWINE_USERNAME: __token__\r\n-        TWINE_PASSWORD: ${{ secrets.PYPI_API_TOKEN }}\r\n-      run: twine upload dist/*\r\n+      - name: Build package\r\n+        run: |\r\n+          python -m pip install --upgrade pip\r\n+          pip install setuptools wheel\r\n+          python setup.py sdist bdist_wheel\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1770647304841,

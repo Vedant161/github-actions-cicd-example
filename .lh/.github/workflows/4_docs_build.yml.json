@@ -3,11 +3,15 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 0,
+            "activePatchIndex": 1,
             "patches": [
                 {
                     "date": 1770647315338,
                     "content": "Index: \n===================================================================\n--- \n+++ \n"
+                },
+                {
+                    "date": 1770648640739,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,5 +1,5 @@\n-name: Check docs build\r\n+name: Docs Build Check\r\n \r\n on:\r\n   push:\r\n     branches: [ main ]\r\n@@ -7,34 +7,28 @@\n     branches: [ main ]\r\n   workflow_dispatch:\r\n \r\n jobs:\r\n-  run:\r\n-    runs-on: ${{ matrix.os }}\r\n-    strategy:\r\n-      matrix:\r\n-        os: [ubuntu-latest]\r\n-        python-version: ['3.11']\r\n-    env:\r\n-      OS: ${{ matrix.os }}\r\n-      PYTHON: ${{ matrix.python-version }}\r\n+  docs:\r\n+    runs-on: ubuntu-latest\r\n+\r\n     timeout-minutes: 10\r\n \r\n     steps:\r\n-    - name: Check out code repository\r\n-      uses: actions/checkout@v2\r\n+      - name: Checkout code\r\n+        uses: actions/checkout@v4\r\n \r\n-    - name: Set up Python ${{ matrix.python-version }}\r\n-      uses: actions/setup-python@v2\r\n-      with:\r\n-        python-version: ${{ matrix.python-version }}\r\n+      - name: Setup Python\r\n+        uses: actions/setup-python@v5\r\n+        with:\r\n+          python-version: '3.11'\r\n \r\n-    - name: Install dependencies\r\n-      run: |\r\n-        python -m pip install --upgrade pip\r\n-        pip install -r requirements.txt\r\n-        pip install -r requirements_docs.txt\r\n+      - name: Install dependencies\r\n+        run: |\r\n+          python -m pip install --upgrade pip\r\n+          pip install -r requirements.txt\r\n+          pip install -r requirements_docs.txt\r\n \r\n-    - name: Check docs build successfully\r\n-      run: |\r\n-        cd docs\r\n-        make html\r\n+      - name: Build documentation\r\n+        run: |\r\n+          cd docs\r\n+          make html\n\\ No newline at end of file\n"
                 }
             ],
             "date": 1770647315338,
