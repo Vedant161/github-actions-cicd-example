@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1770647310674,
@@ -12,6 +12,10 @@
                 {
                     "date": 1770648648023,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,60 +1,28 @@\n-name: Deploy docs to GitHub Pages\r\n+name: Docs Deploy Check\r\n \r\n on:\r\n-  push:\r\n-    branches: [ main ]\r\n   workflow_dispatch:\r\n \r\n jobs:\r\n-  deploy:\r\n-    runs-on: ${{ matrix.os }}\r\n-    strategy:\r\n-      matrix:\r\n-        os: [ubuntu-latest]\r\n-        python-version: ['3.11']\r\n-    env:\r\n-      OS: ${{ matrix.os }}\r\n-      PYTHON: ${{ matrix.python-version }}\r\n-    timeout-minutes: 10\r\n+  docs:\r\n+    runs-on: ubuntu-latest\r\n \r\n     steps:\r\n-    - name: Check out code repository\r\n-      uses: actions/checkout@v2\r\n-      with:\r\n-        path:  github-actions-cicd-example\r\n+      - name: Checkout code\r\n+        uses: actions/checkout@v4\r\n \r\n-    - name: Check out docs repository\r\n-      uses: actions/checkout@v2\r\n-      with:\r\n-        repository: alexmalins/alexmalins.github.io\r\n-        path: alexmalins.github.io\r\n-        token: ${{secrets.PUSH_TOKEN}}\r\n+      - name: Setup Python\r\n+        uses: actions/setup-python@v5\r\n+        with:\r\n+          python-version: '3.11'\r\n \r\n-    - name: Set up Python ${{ matrix.python-version }}\r\n-      uses: actions/setup-python@v2\r\n-      with:\r\n-        python-version: ${{ matrix.python-version }}\r\n+      - name: Install dependencies\r\n+        run: |\r\n+          python -m pip install --upgrade pip\r\n+          pip install -r requirements.txt\r\n+          pip install -r requirements_docs.txt\r\n \r\n-    - name: Install dependencies\r\n-      run: |\r\n-        cd  github-actions-cicd-example\r\n-        python -m pip install --upgrade pip\r\n-        pip install -r requirements.txt\r\n-        pip install -r requirements_docs.txt\r\n-\r\n-    - name: Build docs\r\n-      run: |\r\n-        cd github-actions-cicd-example/docs\r\n-        make html\r\n-\r\n-    - name: Push docs\r\n-      run: |\r\n-        cp -RT  github-actions-cicd-example/docs/build/html alexmalins.github.io/docs/github-actions-cicd-example\r\n-        cd alexmalins.github.io\r\n-        git config --local user.name \"github-actions[bot]\"\r\n-        git config --local user.email \"41898282+github-actions[bot]@users.noreply.github.com\"\r\n-        git add -A\r\n-        git diff-index --quiet HEAD || (git commit -m \"Documentation update\" && git push https://$USERNAME:$REPO_KEY@github.com/alexmalins/alexmalins.github.io.git)\r\n-      env:\r\n-        REPO_KEY: ${{secrets.PUSH_TOKEN}}\r\n-        USERNAME: github-actions[bot]\r\n+      - name: Build documentation\r\n+        run: |\r\n+          cd docs\r\n+          make html\n\\ No newline at end of file\n"
+                },
+                {
+                    "date": 1770649235771,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -1,12 +1,17 @@\n name: Docs Deploy Check\r\n \r\n on:\r\n+  push:\r\n+    branches: [ main ]\r\n+  pull_request:\r\n+    branches: [ main ]\r\n   workflow_dispatch:\r\n \r\n jobs:\r\n   docs:\r\n     runs-on: ubuntu-latest\r\n+    timeout-minutes: 10\r\n \r\n     steps:\r\n       - name: Checkout code\r\n         uses: actions/checkout@v4\r\n"
                 }
             ],
             "date": 1770647310674,
