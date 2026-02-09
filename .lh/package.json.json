@@ -1,0 +1,18 @@
+{
+    "sourceFile": "package.json",
+    "activeCommit": 0,
+    "commits": [
+        {
+            "activePatchIndex": 0,
+            "patches": [
+                {
+                    "date": 1770652540062,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n"
+                }
+            ],
+            "date": 1770652540062,
+            "name": "Commit-0",
+            "content": "{\n  \"name\": \"github-actions-cicd-example\",\n  \"version\": \"1.0.0\",\n  \"description\": \"[![License: MIT](https://img.shields.io/badge/license-MIT-blue)](https://github.com/alexmalins/github-actions-cicd-example/blob/main/LICENSE)\\r [![Tests](https://github.com/alexmalins/github-actions-cicd-example/actions/workflows/1_tests.yml/badge.svg)](https://github.com/alexmalins/github-actions-cicd-example/actions/workflows/1_tests.yml)\\r [![codecov](https://codecov.io/gh/alexmalins/github-actions-cicd-example/branch/main/graph/badge.svg?token=EXFQHNBA9Z)](https://codecov.io/gh/alexmalins/github-actions-cicd-example)\\r [![Code Style: Black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/alexmalins/github-actions-cicd-example/actions/workflows/3_linting.yml)\\r [![Checked with mypy](https://img.shields.io/badge/mypy-checked-blue)](https://github.com/alexmalins/github-actions-cicd-example/actions/workflows/3_linting.yml)\\r [![Latest Documentation](https://img.shields.io/badge/docs-latest-brightgreen)](https://alexmalins.github.io/github-actions-cicd-example)\",\n  \"main\": \"index.js\",\n  \"directories\": {\n    \"doc\": \"docs\",\n    \"test\": \"tests\"\n  },\n  \"scripts\": {\n    \"test\": \"jest\",\n    \"lint\": \"eslint src/\"\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"git+https://github.com/Vedant161/github-actions-cicd-example.git\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"type\": \"commonjs\",\n  \"bugs\": {\n    \"url\": \"https://github.com/Vedant161/github-actions-cicd-example/issues\"\n  },\n  \"homepage\": \"https://github.com/Vedant161/github-actions-cicd-example#readme\",\n  \"devDependencies\": {\n    \"eslint\": \"^10.0.0\",\n    \"express\": \"^5.2.1\",\n    \"jest\": \"^30.2.0\"\n  }\n}\n"
+        }
+    ]
+}
